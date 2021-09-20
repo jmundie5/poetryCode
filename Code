@@ -1,0 +1,58 @@
+from google.colab import drive
+drive.mount('/content/drive')
+
+from google.colab import files
+from textblob import TextBlob
+import nltk
+import random
+import string
+import sys,time,os
+nltk.download('punkt')
+nltk.download('averaged_perceptron_tagger')
+
+
+def typewriter(message):
+  for char in message:
+    sys.stdout.write(char)
+    sys.stdout.flush()
+
+    if char != "\n":
+      time.sleep(0.05)
+    else:
+      time.sleep(1)
+os.system("cls") #clear
+
+with open('/content/drive/MyDrive/Poetry/grandma.txt') as f:
+  text = f.read()
+blob = TextBlob(text)
+tagged_words = blob.tags
+sentence_list = blob.sentences
+full = 0
+print("\n")
+while(full<3):
+  line_hold = sentence_list[random.randint(0,400)]
+  length_test = len(line_hold)
+  #print(line_hold)
+  #print(length_test)
+  
+  if (length_test<60):
+      line_hold = line_hold.replace("\r"," ")
+      line_hold = line_hold.replace("\n"," ")
+      line_hold = line_hold.replace("“","")
+      line_hold = line_hold.replace("”","")
+      typewriter(line_hold)
+      print("\n")
+      
+      full = full+1
+      
+
+#typewriter(sentence_list[random.randint(0,400)])
+#print("\n")
+#typewriter(sentence_list[random.randint(0,400)])
+#print("\n")
+#typewriter(sentence_list[random.randint(0,400)])
+
+#print(text)
+#words = list(map(str, text.split()))
+#print(words)
+
